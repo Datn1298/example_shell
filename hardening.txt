@@ -1,0 +1,12 @@
+- hardening: làm cứng => tăng cường bảo mật của hệ thống
+
+1 số công việc như sau:
+1. Encrypt Data Communication For Linux Server
+2. Avoid Using FTP, Telnet, And Rlogin / Rsh Services on Linux
+3. Minimize Software to Minimize Vulnerability in Linux
+Tránh cài các phần mềm k cần thiết để tránh lỗ hổng trong phần mềm
+4. One Network Service Per System or VM Instance
+5. Keep Linux Kernel and Software Up to Date
+
+ref:
+- https://www.cyberciti.biz/tips/linux-security.html
