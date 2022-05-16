@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+# ham tao user
+# nhap user
+# neu user da ton tai thi nhap user khac
+# neu chua, them user
 create_user(){
 	while :
 		do
@@ -15,7 +19,8 @@ create_user(){
 		done
 }
 
-
+# dat mat khau cho user
+# nhap user, password
 set_pass()
 {
 	read -p "enter user_name:" user
@@ -55,7 +60,10 @@ lock()
 	done
 }
 
-
+# nen thu muc home cuar user
+# nhap user
+# tim thu muc home cua user
+# nen thu muc home
 backup()
 {
 	read -p "Enter user_name: " user
