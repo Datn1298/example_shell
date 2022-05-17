@@ -18,6 +18,14 @@
 
 
 
+# 2.5
+# them tham so sau vao trong httpd.conf
+# ServerSignature Off
+# ServerTokens Prod
+
+# them tham so sau vao php.ini
+# expose_php = Off
+
 
 # 2.7
 # doi voi user binh thuong

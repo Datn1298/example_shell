@@ -10,3 +10,13 @@
 	# cp ./users_history.sh /etc/profile.d/users_history.sh
 	# chmod 770 /etc/profile.d/users_history.sh
 	# source /etc/profile.d/users_history.sh
+
+# neu user root
+	# Tạo folder chứa log
+	# mkdir -p /var/log/sudo_history/
+	# them vao .bashrc
+	# export HISTSIZE=10000
+	# export HISTTIMEFORMAT='%F %T'
+	# export HISTFILE=/var/log/sudo_history/history-sudo-$(who am I | awk '{print $1}';exit)-$(date +%F)
+	# export PROMPT_COMMAND='history -a'
+	# source .bashrc
