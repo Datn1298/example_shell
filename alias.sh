@@ -272,7 +272,7 @@ alias browser=chrome
 #   ForwardX11Trusted yes
 #   TCPKeepAlive yes
 
-# You can now connect to peer1 using the following syntax: $ ssh server10
+# You can now connect to peer1 using the following syntax:$ ssh server10
 #30: It's your turn to share...
 
 ## set some other defaults ##
