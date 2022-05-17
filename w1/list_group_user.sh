@@ -3,8 +3,7 @@
 # liet ke danh sach Group - User
 # Output: danh sachs
 echo "List user:"
-echo ""
 cat /etc/passwd
-echo "List group:"
 echo ""
+echo "List group:"
 cat /etc/group
