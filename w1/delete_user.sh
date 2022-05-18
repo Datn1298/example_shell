@@ -6,11 +6,10 @@
 
 echo -n "User to be deleted:"
 read del_user
-sudo userdel -r $del_user
 
-if [[ ! $(sudo cat /etc/passwd | grep "$del_user") ]];
+if [[ ! $(cat /etc/passwd | grep "$del_user") ]];
 then
 	echo "user $del_user is not exist!"
 else
-	sudo userdel -r $del_user
+	userdel -r $del_user
 fi
