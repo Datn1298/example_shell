@@ -24,16 +24,20 @@ echo "add_header X-XSS-Protection "1; mode=block"" >> nginx.conf
 
 # HTTP Strict Transport Security
 # add_header Strict-Transport-Security 'max-age=31536000; 
+echo "add_header Strict-Transport-Security 'max-age=31536000;" >> nginx.conf
 # restart lai nginx
 
 # X-Frame-Options: them vao file nginx.conf
 # add_header X-Frame-Options “DENY”;
+echo "add_header X-Frame-Options “DENY”;" >> nginx.conf
 # systemctl restart nginx.service
 
 # X-Content-Type-Options
 # add_header X-Content-Type-Options nosniff;
+echo "add_header X-Content-Type-Options nosniff;" >> nginx.conf
 # systemctl restart nginx.service
 
 # Content Security Policy
 # add_header Content-Security-Policy "default-src 'self'";
+echo "add_header Content-Security-Policy "default-src 'self'";" >> nginx.conf
 # systemctl restart nginx.service
