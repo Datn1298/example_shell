@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# liet ke danh sach Group - User
+# liet ke danh sach User
 # Output: danh sachs
 echo "List user:"
 cat /etc/passwd
