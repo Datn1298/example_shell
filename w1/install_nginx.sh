@@ -19,6 +19,7 @@ sudo systemctl start nginx
 # cau hinh: them vao file nginx.conf:
 # X-XSS-Protection: 
 # add_header X-XSS-Protection "1; mode=block"
+echo "add_header X-XSS-Protection "1; mode=block"" >> nginx.conf
 # restart lai nginx
 
 # HTTP Strict Transport Security
