@@ -22,8 +22,19 @@
 	# source .bashrc
 
 if [[ $(/usr/bin/id -u) != "0" ]]; then
-    echo -e "This looks like a 'non-root' user.\nPlease switch to 'root' and run the script again."
-    exit
+  mkdir -p /var/log/users_history/
+	chmod +t /var/log/users_history/
+	cp ./users_history.sh /etc/profile.d/users_history.sh
+	chmod 770 /etc/profile.d/users_history.sh
+	source /etc/profile.d/users_history.sh
 else
-
+	mkdir -p /var/log/sudo_history/
+	cat <<EOF | tee -a .bashrc
+	export HISTSIZE=10000
+	export HISTTIMEFORMAT='%F %T'
+	export HISTFILE=/var/log/sudo_history/history-sudo-$(who am I | awk '{print $1}';exit)-$(date +%F)
+	export PROMPT_COMMAND='history -a'
+	EOF
+	
+	source .bashrc
 fi

@@ -19,6 +19,6 @@ fi
 # sudo systemctl restart nginx
 
 if [ (dpkg -s nginx) -eq 0 ]; then
-  apt install php php-fpm
+  apt install php php8.0-fpm
 	systemctl restart nginx
 fi

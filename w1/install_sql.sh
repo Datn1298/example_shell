@@ -6,4 +6,4 @@ apt update
 
 apt install mysql-server
 
-sudo mysql_secure_installation
+mysql_secure_installation
