@@ -9,12 +9,15 @@ echo -n "Enter file name: "
 read file
 ls -la | grep $file
 
-FILE="example.tar.gz"
+path=${file%/*}
+name=${file##*/}
 
-echo "${FILE%%.*}"
-
-echo "${FILE%.*}"
-
-echo "${FILE#*.}"
-
-echo "${FILE##*.}"
+if [$path -eq $name]
+then
+  ls -la | grep $name
+else
+  temp=$PWD
+  cd $path
+  ls -la | grep $name
+  cd $temp
+fi
