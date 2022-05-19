@@ -12,4 +12,5 @@ then
 	echo "user $create_user already exist!"
 else
 	adduser $create_user
+	passwd $create_user
 fi

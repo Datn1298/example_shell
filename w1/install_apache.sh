@@ -42,43 +42,19 @@ a2ensite $your_domain.conf
 a2dissite 000-default.conf
 
 
-# cau hinh: them vao file apache2.conf hoac httpd.conf
-# X-XSS-Protection: 
-# Header set X-XSS-Protection "1; mode=block"
-echo "
+cat <<EOF | tee -a apache.conf
 # X-XSS-Protection: 
 Header set X-XSS-Protection "1; mode=block"
-" >> httpd.conf
-# systemctl restart apache2.service
 
-# HTTP Strict Transport Security
-# Header set Strict-Transport-Security "max-age=31536000;includeSubDomains; preload"
-# systemctl restart apache2.service
-echo "
 # HTTP Strict Transport Security
 Header set Strict-Transport-Security "max-age=31536000;includeSubDomains; preload"
-" >> httpd.conf
 
-# X-Frame-Options: them vao file nginx.conf
-# Header always append X-Frame-Options DENY
-# systemctl restart apache2.service
-echo "
 # X-Frame-Options: them vao file nginx.conf
 Header always append X-Frame-Options DENY
-" >> httpd.conf
 
-# X-Content-Type-Options
-# Header set X-Content-Type-Options nosniff
-# systemctl restart apache2.service
-echo "
 # X-Content-Type-Options
 Header set X-Content-Type-Options nosniff
-" >> httpd.conf
 
 # Content Security Policy
-# Header set Content-Security-Policy "default-src 'self';"
-# systemctl restart apache2.service
-echo "
-# Content Security Policy
 Header set Content-Security-Policy "default-src 'self';"
-" >> httpd.conf
+EOF

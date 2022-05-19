@@ -3,41 +3,35 @@
 # install Nginx cho distro Ubuntu
 
 # install nginx
-sudo apt update
-sudo apt install nginx
+apt update
+apt install nginx
 
 # Adjusting the Firewall
-sudo ufw app list
+ufw app list
 
 # sudo ufw allow 'Nginx HTTP'
-sudo ufw status
+ufw status
 
 systemctl status nginx
 
-sudo systemctl start nginx
+systemctl start nginx
 
-# cau hinh: them vao file nginx.conf:
+cat <<EOF | tee -a nginx.conf
+
 # X-XSS-Protection: 
-# add_header X-XSS-Protection "1; mode=block"
-echo "add_header X-XSS-Protection "1; mode=block"" >> nginx.conf
-# restart lai nginx
+add_header X-XSS-Protection "1; mode=block"
 
 # HTTP Strict Transport Security
-# add_header Strict-Transport-Security 'max-age=31536000; 
-echo "add_header Strict-Transport-Security 'max-age=31536000;" >> nginx.conf
-# restart lai nginx
+add_header Strict-Transport-Security 'max-age=31536000; 
 
-# X-Frame-Options: them vao file nginx.conf
-# add_header X-Frame-Options “DENY”;
-echo "add_header X-Frame-Options “DENY”;" >> nginx.conf
-# systemctl restart nginx.service
+# X-Frame-Options
+add_header X-Frame-Options “DENY”;
 
 # X-Content-Type-Options
-# add_header X-Content-Type-Options nosniff;
-echo "add_header X-Content-Type-Options nosniff;" >> nginx.conf
-# systemctl restart nginx.service
+add_header X-Content-Type-Options nosniff;
 
 # Content Security Policy
-# add_header Content-Security-Policy "default-src 'self'";
-echo "add_header Content-Security-Policy "default-src 'self'";" >> nginx.conf
-# systemctl restart nginx.service
+add_header Content-Security-Policy "default-src 'self'";
+EOF
+
+systemctl restart nginx
