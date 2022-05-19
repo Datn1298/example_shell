@@ -4,7 +4,7 @@
 
 # install nginx
 apt update
-apt install nginx
+apt install nginx -y
 
 # Adjusting the Firewall
 ufw app list
@@ -14,24 +14,24 @@ ufw status
 
 systemctl status nginx
 
-systemctl start nginx
+# systemctl start nginx
 
-cat <<EOF | tee -a nginx.conf
+# cat <<EOF | tee -a nginx.conf
 
-# X-XSS-Protection: 
-add_header X-XSS-Protection "1; mode=block"
+# # X-XSS-Protection: 
+# add_header X-XSS-Protection "1; mode=block"
 
-# HTTP Strict Transport Security
-add_header Strict-Transport-Security 'max-age=31536000; 
+# # HTTP Strict Transport Security
+# add_header Strict-Transport-Security 'max-age=31536000; 
 
-# X-Frame-Options
-add_header X-Frame-Options “DENY”;
+# # X-Frame-Options
+# add_header X-Frame-Options “DENY”;
 
-# X-Content-Type-Options
-add_header X-Content-Type-Options nosniff;
+# # X-Content-Type-Options
+# add_header X-Content-Type-Options nosniff;
 
-# Content Security Policy
-add_header Content-Security-Policy "default-src 'self'";
-EOF
+# # Content Security Policy
+# add_header Content-Security-Policy "default-src 'self'";
+# EOF
 
-systemctl restart nginx
+# systemctl restart nginx
