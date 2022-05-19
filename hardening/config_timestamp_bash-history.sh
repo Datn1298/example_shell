@@ -20,3 +20,10 @@
 	# export HISTFILE=/var/log/sudo_history/history-sudo-$(who am I | awk '{print $1}';exit)-$(date +%F)
 	# export PROMPT_COMMAND='history -a'
 	# source .bashrc
+
+if [[ $(/usr/bin/id -u) != "0" ]]; then
+    echo -e "This looks like a 'non-root' user.\nPlease switch to 'root' and run the script again."
+    exit
+else
+
+fi
