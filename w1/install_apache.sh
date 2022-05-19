@@ -14,7 +14,8 @@ ufw allow 'Apache'
 # systemctl status apache2
 
 # Create a directory for $your_domain
-your_domain=""
+echo -n "Enter your domain: "
+read your_domain
 
 mkdir -p /var/www/$your_domain/html
 chown -R $USER:$USER /var/www/$your_domain/html
@@ -27,7 +28,18 @@ touch /var/www/$your_domain/html/index.html
 # Create a virtual host file
 touch /etc/apache2/sites-available/$your_domain.conf
 
+cat <<EOF | tee -a /var/www/$your_domain/html
+<html>
+	<head>
+		<title>Welcome to Your_domain!</title>
+	</head>
+	<body>
+		<h1>Success!  The your_domain virtual host is working!</h1>
+	</body>
+</html>
+EOF
 
+cat <<EOF | tee -a /etc/apache2/sites-available/$your_domain.conf
 echo "<VirtualHost *:80>
 	ServerAdmin admin@$your_domain
 	ServerName $your_domain
@@ -35,7 +47,10 @@ echo "<VirtualHost *:80>
 	DocumentRoot /var/www/$your_domain/html
 	ErrorLog ${APACHE_LOG_DIR}/error.log
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>" >> /etc/apache2/sites-available/$your_domain.conf
+</VirtualHost>"
+EOF
+
+
 
 # Activate virtual host configuration file
 a2ensite $your_domain.conf
@@ -57,4 +72,9 @@ Header set X-Content-Type-Options nosniff
 
 # Content Security Policy
 Header set Content-Security-Policy "default-src 'self';"
+
+ServerSignature Off
+ServerTokens Prod
 EOF
+
+systemctl restart apache2.service

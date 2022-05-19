@@ -3,7 +3,7 @@
 echo -n "Enter your domain: "
 read your_domain
 
-cat <<EOF | tee -a 
+cat <<EOF | tee -a /
 <VirtualHost *:80>
 	ServerAdmin admin@$your_domain
 	ServerName $your_domain
@@ -13,8 +13,6 @@ cat <<EOF | tee -a
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 EOF
-
-sed 's/$your_domain/'
 
 cat <<EOF | tee -a apache.conf
 # X-XSS-Protection: 
@@ -31,8 +29,11 @@ Header set X-Content-Type-Options nosniff
 
 # Content Security Policy
 Header set Content-Security-Policy "default-src 'self';"
+
+ServerSignature Off
+ServerTokens Prod
 EOF
 
-
+systemctl restart apache2.service
 
 
