@@ -1,0 +1,14 @@
+# X-XSS-Protection: 
+Header set X-XSS-Protection "1; mode=block"
+
+# HTTP Strict Transport Security
+Header set Strict-Transport-Security "max-age=31536000;includeSubDomains; preload"
+
+# X-Frame-Options: them vao file nginx.conf
+Header always append X-Frame-Options DENY
+
+# X-Content-Type-Options
+Header set X-Content-Type-Options nosniff
+
+# Content Security Policy
+Header set Content-Security-Policy "default-src 'self';"
