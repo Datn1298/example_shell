@@ -221,7 +221,9 @@ do
 		9. Install Nginx
 		10. Install PHP
 		11. Install MySQL
-		12. exit"
+		12. Configuare Apache2
+		13. Configuare Nginx
+		14. exit"
 		read -p "Enter your choice: " choice
 
 
@@ -237,7 +239,9 @@ do
 		9) install_nginx ;;
 		10) install_php ;;
 		11) install_mysql ;;
-		12) echo "ThankYou, have a nice day...."
+		12) config_apache2 ;;
+		13) config_nginx ;;
+		14) echo "ThankYou, have a nice day...."
 		   exit 1 ;;
 		*) echo "invalid input...";;
 	esac	
