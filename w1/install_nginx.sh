@@ -9,8 +9,8 @@ apt install nginx -y
 # Adjusting the Firewall
 ufw app list
 
-# sudo ufw allow 'Nginx HTTP'
-ufw status
+ufw allow 'Nginx HTTP'
+# ufw status
 
 systemctl status nginx
 
