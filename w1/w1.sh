@@ -108,7 +108,7 @@ config_apache2(){
 
 	# # Make a sample page for your website
 	# touch /var/www/$your_domain/html/index.html
-	# cat <<EOF | tee /var/www/$your_domain/html
+	# cat <<EOF | tee /var/www/$your_domain/html/index.html
 	# <html>
 	# 	<head>
 	# 		<title>Welcome to Your_domain!</title>
