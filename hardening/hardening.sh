@@ -25,12 +25,50 @@ if [[ ! $(cat /etc/passwd | grep "$edit_user") ]];
 then
 	echo "user $edit_user is not exist!"
 else
-	echo "$edit_user  ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/username
+	usermod -aG sudo $edit_user
 fi
 
 # Sửa lại file /etc/login.def để giới hạn thời gian sử dụng password cũ
 # https://man7.org/linux/man-pages/man5/login.defs.5.html
 # https://programmer.group/linux-account-password-expiration-security-policy-settings.html
+
+echo --------Check whether to set the minimum number of days between password changes-----
+MINDAY = ` cat -n/etc/login.defs |  grep -v ".*#.*" |  grep PASS_MIN_DAYS | awk  '{print $1 }' `
+ sed -i '' $MINDAY 's/.*PASS_MIN_DAYS.*/PASS_MIN_DAYS 6/'/etc/login.defs
+ echo  "Check the minimum number of days between password changes completed" 
+echo --Check whether the number of days to warn before password expiration is set ---
+WARNAGE = ` cat -n/etc/login.defs |  grep -v ".*#.*" |  grep PASS_WARN_AGE | awk  '{print $1 }' `
+ sed -i '' $WARNAGE 's/.*PASS_WARN.*/PASS_WARN_AGE 30/'/etc/login.defs
+ echo  "Check the number of warning days before the password expires complete"
+
+echo ---Check password life cycle------
+MAXDAY = ` cat -n/etc/login.defs |  grep -v ".*#.*" |  grep PASS_MAX_DAYS | awk  '{print $1 }' `
+ sed -i '' $MAXDAY 's/.*PASS_MAX.*/PASS_MAX_DAYS 90/'/etc/login.defs
+ echo  "Check password life cycle completed"
+
+echo ---Check the minimum password length----
+MINLEN = ` cat -n/etc/login.defs |  grep -v ".*#.*" |  grep PASS_MIN_LEN | awk  '{print $1 }' `
+ sed -i '' $MINDAY 's/.*PASS_MIN_LEN.*/PASS_MIN_ LEN 6/'/etc/login.defs
+ echo  "Check the minimum password length"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
