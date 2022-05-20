@@ -108,12 +108,7 @@ config_apache2(){
 
 	# # Make a sample page for your website
 	# touch /var/www/$your_domain/html/index.html
-	# # 
-
-	# # Create a virtual host file
-	# touch /etc/apache2/sites-available/$your_domain.conf
-
-	# cat <<EOF | tee -a /var/www/$your_domain/html
+	# cat <<EOF | tee /var/www/$your_domain/html
 	# <html>
 	# 	<head>
 	# 		<title>Welcome to Your_domain!</title>
@@ -123,8 +118,11 @@ config_apache2(){
 	# 	</body>
 	# </html>
 	# EOF
+	# #
 
-	# cat <<EOF | tee -a /etc/apache2/sites-available/$your_domain.conf
+	# # Create a virtual host file
+	# touch /etc/apache2/sites-available/$your_domain.conf
+	# cat <<EOF | tee /etc/apache2/sites-available/$your_domain.conf
 	# echo "<VirtualHost *:80>
 	# 	ServerAdmin admin@$your_domain
 	# 	ServerName $your_domain
