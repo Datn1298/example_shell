@@ -1,0 +1,11 @@
+---
+- name: Transfer and execute a script.
+  hosts: server
+  user: all
+  sudo: yes
+  tasks:
+     - name: Transfer the script
+       copy: src=w1.sh dest=/home/test_user mode=0777
+
+     - name: Execute the script
+       local_action: command sudo sh /home/test_user/w1.sh

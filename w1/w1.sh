@@ -93,7 +93,7 @@ install_apache(){
 	# ufw app list
 	ufw allow 'Apache'
 
-	config_apache2
+	# config_apache2
 }
 
 config_apache2(){
@@ -169,7 +169,7 @@ install_nginx(){
 	# ufw app list
 	ufw allow 'Nginx HTTP'
 
-	config_nginx
+	# config_nginx
 }
 
 config_nginx(){
