@@ -1,5 +1,5 @@
 ---
-- hosts: myserver
+- hosts: web
   become: yes
   vars:
     - vars/default.yml
