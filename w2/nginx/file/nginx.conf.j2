@@ -1,12 +1,3 @@
-<VirtualHost *:{{ http_port }}>
-  ServerAdmin webmaster@localhost
-  ServerName {{ http_host }}
-  ServerAlias www.{{ http_host }}
-  DocumentRoot /var/www/{{ http_host }}
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-
 server {
   listen {{ http_port }};
   listen [::]:{{ http_port }};
@@ -14,7 +5,7 @@ server {
   root /var/www/{{ http_host }}/html;
   index index.html index.htm index.nginx-debian.html;
 
-  server_name {{ http_host }} www.{{ http_host }};
+  server_name {{ http_host }};
 
   location / {
     try_files $uri $uri/ =404;
