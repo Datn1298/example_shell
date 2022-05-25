@@ -1,0 +1,36 @@
+---
+- hosts: web
+  become: true
+
+- tasks:
+  - name: Set up the repository
+    apt: 
+      name: {{ item }}
+      update_cache: yes 
+      state: latest
+    with_item:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    
+  - name: Add Docker’s official GPG key
+    apt-key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+  - name: Install Docker Engine
+    apt: 
+      name: {{ item }}
+      update_cache: yes 
+      state: latest
+    with_item:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
