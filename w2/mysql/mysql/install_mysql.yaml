@@ -1,8 +1,7 @@
 ---
 - hosts: web
   become: yes
-  vars:
-    - vars/default.yml
+
 - tasks:
 
   - name: Install MySQL
