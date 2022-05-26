@@ -1,15 +1,15 @@
 ---
 - hosts: test
-  become: true
+  # become: true
   tasks:
   - name: Get List User
     command: cat /etc/passwd
     register: list_users
   - name: List User
-    debug: var=list_users
+    debug: var=list_users.stdout_lines
 
   - name: Get List Group
     command: cat /etc/group
     register: list_group
   - name: List User
-    debug: var=list_group
+    debug: var=list_group.stdout_lines

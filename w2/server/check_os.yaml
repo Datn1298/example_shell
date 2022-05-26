@@ -1,15 +1,18 @@
 ---
-- hosts: web
-  become: true
+- hosts: test
+  # become: true
   tasks:
   - name: Check OS
-    ansible.builtin.shell:
-      cmd: cat /proc/version
+    command: cat /proc/version
+    register: os_info
+  - debug: os_info.stdout_lines
 
   - name: FREE AND USED MEMORY
-    ansible.builtin.shell:
-      cmd: free -h
+    command: free -h
+    register: mem_info
+  - debug: mem_info.stdout_lines
 
   - name: FILE SYSTEM DISK SPACE USAGE
-    ansible.builtin.shell:
-      cmd: df
+    command: df
+    register: disk_info
+  - debug: disk_info.stdout_lines
