@@ -2,17 +2,20 @@
 - hosts: test
   # become: true
   tasks:
-  - name: Check OS
+  - name: CHECK OS
     command: cat /proc/version
     register: os_info
-  - debug: os_info.stdout_lines
+  - name: OS info
+    debug: os_info.stdout_lines
 
-  - name: FREE AND USED MEMORY
+  - name: GET FREE AND USED MEMORY
     command: free -h
     register: mem_info
-  - debug: mem_info.stdout_lines
+  - name: FREE AND USED MEMORY
+    debug: mem_info.stdout_lines
 
-  - name: FILE SYSTEM DISK SPACE USAGE
+  - name: GET FILE SYSTEM DISK SPACE USAGE
     command: df
     register: disk_info
-  - debug: disk_info.stdout_lines
+  - name: FILE SYSTEM DISK SPACE USAGE
+    debug: disk_info.stdout_lines
