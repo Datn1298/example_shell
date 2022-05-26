@@ -2,8 +2,8 @@
 
 # liet ke danh sach User
 # Output: danh sachs
-echo "List user:"
+echo "===== LIST USER ====="
 cat /etc/passwd
 echo ""
-echo "List group:"
+echo "===== LIST GROUP ====="
 cat /etc/group

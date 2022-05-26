@@ -10,4 +10,5 @@ cat /proc/version
 echo "FREE AND USED MEMORY"
 free -h
 
-echo ""
+echo "FILE SYSTEM DISK SPACE USAGE"
+df

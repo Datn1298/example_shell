@@ -229,7 +229,7 @@ do
 
 	case $choice in 
 		1) create_user ;;
-	  2) delete_user ;;
+	    2) delete_user ;;
 		3) edit_user_permission ;;
 		4) list_user ;;
 		5) list_group ;;

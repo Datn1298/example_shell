@@ -2,7 +2,8 @@
 
 # thay doi thong tin cho user
 
-echo -n "Enter user: "
+echo "===== GRANT SUDO PERMISSION FOR USER ====="
+echo -n "Enter the user: "
 read edit_user
 
 if [[ ! $(cat /etc/passwd | grep "$edit_user") ]];

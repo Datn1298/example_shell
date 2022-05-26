@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # install Nginx cho distro Ubuntu
-
+echo "===== INSTALL NGINX ====="
 # install nginx
 apt update
 apt install nginx -y

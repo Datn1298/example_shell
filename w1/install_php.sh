@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # install php cho distro Ubuntu
-
+echo "===== CONFIGUARE PHP ====="
 apt update
 
 # check installed apache2

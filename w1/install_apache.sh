@@ -1,5 +1,5 @@
 #! /bin/bash
-
+echo "===== INSTALL APACHE2 ====="
 # install Apache cho distro Ubuntu
 # Update
 apt update
