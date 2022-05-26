@@ -1,11 +1,12 @@
 ---
 - hosts: web
-  become: true
+  become: yes
   vars:
-    - vars/default.yml 
+    - user: datnt185
+    - password: 123
 - tasks:  
-  - name: Add the user 'Adam Listek' with a specific uid and a primary group of 'sudo'
-    ansible.builtin.user:
+  - name: Add the user
+    user:
       name: "{{ user }}"
       password: "{{ password }}"
       

@@ -1,9 +1,9 @@
 ---
-- hosts: web
-  become: true
+- hosts: test
+  become: yes
   vars:
     - vars/default.yml 
-- tasks:
+  tasks:
   - name: CHANGE FILE PERMISSION
     ansible.builtin.file:
       path: "{{ path }}"

@@ -6,16 +6,14 @@
     command: cat /proc/version
     register: os_info
   - name: OS info
-    debug: os_info.stdout_lines
-
+    debug: var=os_info.stdout_lines
   - name: GET FREE AND USED MEMORY
     command: free -h
     register: mem_info
   - name: FREE AND USED MEMORY
-    debug: mem_info.stdout_lines
-
+    debug: var=mem_info.stdout_lines
   - name: GET FILE SYSTEM DISK SPACE USAGE
     command: df
     register: disk_info
   - name: FILE SYSTEM DISK SPACE USAGE
-    debug: disk_info.stdout_lines
+    debug: var=disk_info.stdout_lines
