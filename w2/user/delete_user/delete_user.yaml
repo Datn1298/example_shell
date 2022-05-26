@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: true
+  vars:
+    - vars/default.yml 
+- tasks:   
+  - name: Remove the user if present in the linux system
+    ansible.builtin.user:
+      name: "{{ user }}"
+      state: absent
+      remove: yes

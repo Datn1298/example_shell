@@ -1,0 +1,10 @@
+---
+- hosts: web
+  become: true
+  vars:
+    - vars/default.yml 
+- tasks:
+  - name: GRANT SUDO PERMISSION FOR USER
+    ansible.builtin.user:
+      name: "{{ user }}"
+      group: SUDO
