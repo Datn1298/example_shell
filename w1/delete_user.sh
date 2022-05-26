@@ -5,7 +5,7 @@
 # output: user
 
 echo "===== DELETE USER ====="
-echo -n "Enter the user:"
+echo -n "Enter the user: "
 read del_user
 
 if [[ ! $(cat /etc/passwd | grep "$del_user") ]];
