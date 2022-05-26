@@ -1,0 +1,11 @@
+---
+- hosts: web
+  become: true
+  tasks:
+  - name: List User
+    ansible.builtin.shell:
+      cmd: cat /etc/passwd
+
+  - name: List User
+    ansible.builtin.shell:
+      cmd: cat /etc/group

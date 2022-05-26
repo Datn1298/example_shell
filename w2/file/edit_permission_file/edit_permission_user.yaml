@@ -1,0 +1,10 @@
+---
+- hosts: web
+  become: true
+  vars:
+    - vars/default.yml 
+- tasks:
+  - name: CHANGE FILE PERMISSION
+    ansible.builtin.file:
+      path: "{{ path }}"
+      mode: "{{ mode }}"
