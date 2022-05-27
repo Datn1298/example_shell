@@ -7,6 +7,9 @@ create_user(){
 	echo -n "Enter the Password: "
 	read password
 
+	sed 's/user:*/user: "$create_user"/g' user/create_user/var/default.yaml
+	sed 's/password:*/user: "$password"/g' user/create_user/var/default.yaml
+
 	ansible-playbook user/create_user/create_user.yaml
 
 }

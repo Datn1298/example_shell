@@ -5,8 +5,7 @@
   vars_file:
     - vars/default.yaml
 - tasks:  
-  - name: Add the user
+  - name: Create the user
     user:
       name: "{{ user }}"
       password: "{{ password }}"
-      
