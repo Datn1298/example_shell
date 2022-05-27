@@ -13,7 +13,7 @@
   - name: FREE AND USED MEMORY
     debug: var=mem_info.stdout_lines
   - name: GET FILE SYSTEM DISK SPACE USAGE
-    command: df
+    command: df -h
     register: disk_info
   - name: FILE SYSTEM DISK SPACE USAGE
     debug: var=disk_info.stdout_lines
