@@ -2,7 +2,7 @@
 - hosts: test
   become: yes
   vars:
-    - vars/default.yml 
+    - vars/default.yaml 
   tasks:
   - name: CHANGE FILE PERMISSION
     ansible.builtin.file:

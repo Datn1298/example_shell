@@ -1,0 +1,10 @@
+---
+- hosts: test
+  vars_files:
+    - vars/default.yaml 
+  tasks:
+  - name: GET FILE PERMISSION
+    acl: "{{ path }}"
+    register: file_permission_info
+  - name: FILE PERMISSION
+    debug: var=file_permission_info
