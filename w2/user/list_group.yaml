@@ -1,0 +1,9 @@
+---
+- hosts: test
+  # become: true
+  tasks:
+  - name: Get List Group
+    command: cat /etc/group
+    register: list_group
+  - name: List Group
+    debug: var=list_group.stdout_lines
