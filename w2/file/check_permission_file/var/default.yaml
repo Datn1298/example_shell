@@ -1,2 +1,2 @@
-path: "path"
-mode: "0777"
+path: "/home/datnt/test/test.txt"
+mode: "0666"
