@@ -1,9 +1,9 @@
 ---
-- hosts: web
+- hosts: test
   become: yes
-  vars:
-    - user: datnt185
-    - password: 123
+  become_user: datnt
+  vars_file:
+    - vars/default.yaml
 - tasks:  
   - name: Add the user
     user:

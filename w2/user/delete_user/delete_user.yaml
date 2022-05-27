@@ -1,8 +1,9 @@
 ---
-- hosts: web
+- hosts: test
   become: true
-  vars:
-    - vars/default.yml 
+  become_user: datnt
+  vars_files:
+    - vars/default.yaml 
 - tasks:   
   - name: Remove the user if present in the linux system
     ansible.builtin.user:
