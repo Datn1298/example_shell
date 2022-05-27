@@ -8,6 +8,8 @@ create_user(){
 	read password
 
 	sed -i '' $WARNAGE 's/.*PASS_WARN.*/PASS_WARN_AGE 30/'/etc/login.defs
+
+	ansible-playbook user/create_user/create_user.yaml
 }
 
 delete_user(){
@@ -15,6 +17,7 @@ delete_user(){
 	echo -n "Enter the user:"
 	read del_user
 
+	ansible-playbook user/delete_user/delete_user.yaml
 }
 
 edit_user_permission(){
@@ -22,6 +25,7 @@ edit_user_permission(){
 	echo -n "Enter the user: "
 	read edit_user
 
+	ansible-playbook user/edit_user_permission/edit_user_permission.yaml
 }
 
 
@@ -59,14 +63,8 @@ edit_file_permission(){
 
 install_apache(){
   echo "===== INSTALL APACHE2 ====="
-	apt update
-	# Install Apache2
-	apt install apache2 -y
-	# Firewall configuration
-	# ufw app list
-	ufw allow 'Apache'
 
-	# config_apache2
+	ansible-playbook install/install_apache.yaml
 }
 
 config_apache2(){
@@ -135,14 +133,8 @@ config_apache2(){
 
 install_nginx(){
 	echo "===== INSTALL NGINX ====="
-	# install nginx
-	apt update
-	apt install nginx -y
-	# Adjusting the Firewall
-	# ufw app list
-	ufw allow 'Nginx HTTP'
 
-	# config_nginx
+	ansible-playbook install/install_nginx.yaml
 }
 
 config_nginx(){
@@ -170,15 +162,14 @@ config_nginx(){
 
 install_php(){
 	echo "===== CONFIGUARE PHP ====="
-	apt update
-	apt install php -y
+
+	ansible-playbook install/install_php.yaml
 }
 
 install_mysql(){
 	echo "===== CONFIGUARE MYSQL ====="
-	apt update
-	apt install mysql-server -y
-	mysql_secure_installation
+	
+	ansible-playbook install/install_mysql.yaml
 }
 while :
 do
