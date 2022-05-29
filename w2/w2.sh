@@ -6,24 +6,20 @@ create_user(){
 	read create_user
 	echo -n "Enter the Password: "
 	read password
+	
 
-<<<<<<< HEAD
-	sed -i '' $WARNAGE 's/.*PASS_WARN.*/PASS_WARN_AGE 30/'/etc/login.defs
-
-	ansible-playbook user/create_user/create_user.yaml
-=======
-	sed 's/user:*/user: "$create_user"/g' user/create_user/var/default.yaml
-	sed 's/password:*/user: "$password"/g' user/create_user/var/default.yaml
+	sed 's/${_user}/'$create_user'/g' user/create_user/vars/template.yaml > user/create_user/vars/template.yaml/default.yaml
+	sed 's/${_password}/'$password'/g' user/create_user/vars/template.yaml > user/create_user/vars/template.yaml/default.yaml
 
 	ansible-playbook user/create_user/create_user.yaml
-
->>>>>>> b48f48db7c2c500745249bcb5e1a91d175f5b8ee
 }
 
 delete_user(){
 	echo "===== DELETE USER ====="
 	echo -n "Enter the user:"
 	read del_user
+
+	sed 's/${_user}/'$del_user'/g' user/delete_user/vars/template.yaml > user/delete_user/vars/template.yaml/default.yaml
 
 	ansible-playbook user/delete_user/delete_user.yaml
 }
@@ -32,6 +28,8 @@ edit_user_permission(){
 	echo "===== GRANT SUDO PERMISSION FOR USER ====="
 	echo -n "Enter the user: "
 	read edit_user
+
+	sed 's/${_user}/'$edit_user'/g' user/edit_user_permission/vars/template.yaml > user/edit_user_permission/vars/template.yaml/default.yaml
 
 	ansible-playbook user/edit_user_permission/edit_user_permission.yaml
 }
@@ -53,7 +51,7 @@ check_file_permission(){
 
 	read file
 
-
+	sed 's/${_path}/'$file'/g' file/check_file_permission/vars/template.yaml > file/check_file_permission/vars/default.yaml
 
 	ansible-playbook file/check_file_permission.yaml
 }
@@ -65,6 +63,8 @@ edit_file_permission(){
 	echo -n "Permission: "
 	read permission
 
+	sed 's/${_path}/'$file'/g' file/edit_file_permission/vars/template.yaml > file/edit_file_permission/vars/default.yaml
+	sed 's/${_permission}/'$permission'/g' file/edit_file_permission/vars/template.yaml > file/edit_file_permission/vars/default.yaml
 
 	ansible-playbook file/edit_file_permission.yaml
 }
