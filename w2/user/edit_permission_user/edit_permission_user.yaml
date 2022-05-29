@@ -1,8 +1,8 @@
 ---
-- hosts: web
+- hosts: test
   become: true
-  vars:
-    - vars/default.yml 
+  vars_files:
+    - vars/default.yaml 
 - tasks:
   - name: GRANT SUDO PERMISSION FOR USER
     ansible.builtin.user:

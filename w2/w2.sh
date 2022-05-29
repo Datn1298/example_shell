@@ -7,9 +7,17 @@ create_user(){
 	echo -n "Enter the Password: "
 	read password
 
+<<<<<<< HEAD
 	sed -i '' $WARNAGE 's/.*PASS_WARN.*/PASS_WARN_AGE 30/'/etc/login.defs
 
 	ansible-playbook user/create_user/create_user.yaml
+=======
+	sed 's/user:*/user: "$create_user"/g' user/create_user/var/default.yaml
+	sed 's/password:*/user: "$password"/g' user/create_user/var/default.yaml
+
+	ansible-playbook user/create_user/create_user.yaml
+
+>>>>>>> b48f48db7c2c500745249bcb5e1a91d175f5b8ee
 }
 
 delete_user(){
@@ -64,100 +72,26 @@ edit_file_permission(){
 install_apache(){
   echo "===== INSTALL APACHE2 ====="
 
-	ansible-playbook install/install_apache.yaml
+
+	ansible-playbook install/install_apache/install_apache.yaml
+
 }
 
 config_apache2(){
 	echo "===== CONFIGUARE APACHE2 ====="
 
-	# echo -n "Enter your domain: "
-	# read your_domain
-
-	# mkdir -p /var/www/$your_domain/html
-	# chown -R $USER:$USER /var/www/$your_domain/html
-	# chmod -R 755 /var/www/$your_domain
-
-	# # Make a sample page for your website
-	# touch /var/www/$your_domain/html/index.html
-	# cat <<EOF | tee /var/www/$your_domain/html/index.html
-	# <html>
-	# 	<head>
-	# 		<title>Welcome to Your_domain!</title>
-	# 	</head>
-	# 	<body>
-	# 		<h1>Success!  The your_domain virtual host is working!</h1>
-	# 	</body>
-	# </html>
-	# EOF
-	# #
-
-	# # Create a virtual host file
-	# touch /etc/apache2/sites-available/$your_domain.conf
-	# cat <<EOF | tee /etc/apache2/sites-available/$your_domain.conf
-	# echo "<VirtualHost *:80>
-	# 	ServerAdmin admin@$your_domain
-	# 	ServerName $your_domain
-	# 	ServerAlias $your_domain
-	# 	DocumentRoot /var/www/$your_domain/html
-	# 	ErrorLog ${APACHE_LOG_DIR}/error.log
-	# 	CustomLog ${APACHE_LOG_DIR}/access.log combined
-	# </VirtualHost>"
-	# EOF
-
-	# # Activate virtual host configuration file
-	# a2ensite $your_domain.conf
-	# a2dissite 000-default.conf
-
-	# cat <<EOF | tee -a apache.conf
-	# # X-XSS-Protection: 
-	# Header set X-XSS-Protection "1; mode=block"
-
-	# # HTTP Strict Transport Security
-	# Header set Strict-Transport-Security "max-age=31536000;includeSubDomains; preload"
-
-	# # X-Frame-Options: them vao file nginx.conf
-	# Header always append X-Frame-Options DENY
-
-	# # X-Content-Type-Options
-	# Header set X-Content-Type-Options nosniff
-
-	# # Content Security Policy
-	# Header set Content-Security-Policy "default-src 'self';"
-
-	# ServerSignature Off
-	# ServerTokens Prod
-	# EOF
-
-	# systemctl restart apache2.service
 }
 
 install_nginx(){
 	echo "===== INSTALL NGINX ====="
 
-	ansible-playbook install/install_nginx.yaml
+	
+	ansible-playbook install/install_mysql/install_nginx.yaml
 }
 
 config_nginx(){
 	echo "===== CONFIGUARE NGINX ====="
-	# cat <<EOF | tee -a nginx.conf
-
-	# # X-XSS-Protection: 
-	# add_header X-XSS-Protection "1; mode=block"
-
-	# # HTTP Strict Transport Security
-	# add_header Strict-Transport-Security 'max-age=31536000; 
-
-	# # X-Frame-Options
-	# add_header X-Frame-Options “DENY”;
-
-	# # X-Content-Type-Options
-	# add_header X-Content-Type-Options nosniff;
-
-	# # Content Security Policy
-	# add_header Content-Security-Policy "default-src 'self'";
-	# EOF
-
-	# systemctl restart nginx
+	
 }
 
 install_php(){
@@ -193,7 +127,7 @@ do
 
 	case $choice in 
 		1) create_user ;;
-	    2) delete_user ;;
+		2) delete_user ;;
 		3) edit_user_permission ;;
 		4) list_user ;;
 		5) list_group ;;
