@@ -3,25 +3,22 @@
   remote_user: root
   vars:
     package_names:
-      - sudoers
+      - sudo
   tasks:
     - name: Check if listed package is installed or not
       command: dpkg-query -l "{{ item }}"
       loop: "{{ package_names }}"
       register: check_installed
-
     - name: Install package if not present
       package:
         name: "{{ item }}"
         state: present
       loop: "{{ package_names }}"
       when: check_installed is failed
-    
     - name: Check again
       command: dpkg-query -l "{{ item }}"
       loop: "{{ package_names }}"
-      register: check2_installed
-    
+      register: check2_installed 
     - name: Result
       debug: var=check2_installed.stdout_lines
 
