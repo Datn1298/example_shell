@@ -6,8 +6,4 @@
     command: cat /etc/passwd
     register: list_users
   - name: List User
-<<<<<<< HEAD
     debug: var=list_users.stdout_lines
-=======
-    debug: var=list_users.stdout_lines
->>>>>>> b48f48db7c2c500745249bcb5e1a91d175f5b8ee
