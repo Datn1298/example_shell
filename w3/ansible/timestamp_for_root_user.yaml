@@ -1,0 +1,19 @@
+---
+- hosts: test
+  become: true
+  become_user: datnt
+- tasks:
+  - name: Create folder
+    file:
+      path: /var/log/sudo_history/
+      state: directory
+  - name: Config ~/.bashrc
+    blockinfile:
+      path: /root/.bashrc
+      block: |
+        export HISTSIZE=10000
+        export HISTTIMEFORMAT='%F %T'
+        export HISTFILE=/var/log/sudo_history/history-sudo-$(who am I | awk '{print $1}';exit)-$(date +%F)
+        export PROMPT_COMMAND='history -a'
+  - name: source /root/.bashrc
+    shell: source /root/.bashrc
