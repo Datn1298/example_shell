@@ -19,7 +19,7 @@
     template:
       src: "files/apache.conf.j2"
       dest: "/etc/apache2/sites-available/{{ http_conf }}"
-    notify: restart-apache
+    notify: Restart Apache
   - name: Enable new site
     shell: /usr/sbin/a2ensite {{ http_conf }}
     notify: Reload Apache
@@ -28,7 +28,7 @@
     when: disable_default
     notify: Reload Apache
   handlers:
-  - name: restart-apache
+  - name: Restart Apache
     service:
       name: apache2
       state: restarted

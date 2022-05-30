@@ -1,44 +1,31 @@
 ---
-- hosts: web
+- hosts: test
   become: true
   become_user: datnt
   vars:
     - vars/default.yml
 - tasks:
-  - name: Install latest version of Nginx
-    apt: name=nginx update_cache=yes state=latest
-
-  - name: Adjusting the Firewall
-    ufw:
-      rule: allow
-      port: "{{ http_port }}"
-      protoclol: tcp
-
   - name: Setting Up Server Blocks
     file:
       path: "/var/www/{{ http_host }}/html"
       state: directory
       owner: "{{ app_user }}"
       mode: '0755'
-
   - name: Copy your index page
     template:
       src: "files/index.html.j2"
       dest: "/var/www/{{ http_host }}/html/index.html"
-
   - name: Set up virtuahHost
     template:
       src: "files/nginx.conf.j2"
       dest: "/etc/nginx/sites-available/{{ http_conf }}"
     notify: Restart Nginx
-
   - name: Enable new site
     file:
       src: /etc/nginx/sites-available/
       dest: /etc/nginx/sites-enabled/
       state: link
     notify: Restart Nginx
-
   handlers:
   - name: Restart Nginx
     service:
