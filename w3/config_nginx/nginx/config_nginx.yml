@@ -26,6 +26,31 @@
       dest: /etc/nginx/sites-enabled/
       state: link
     notify: Restart Nginx
+  - name: X-XSS-Protection
+    lineinfile:
+      path: ~/.bashrc
+      line: add_header X-XSS-Protection "1; mode=block"
+    notify: Restart Nginx
+  - name: HTTP Strict Transport Security
+    lineinfile:
+      path: ~/.bashrc
+      line: add_header       Strict-Transport-Security       'max-age=31536000; includeSubDomains; preload';
+    notify: Restart Nginx
+  - name: X-Frame-Options
+    lineinfile:
+      path: ~/.bashrc
+      line: add_header X-Frame-Options “DENY”;
+    notify: Restart Nginx
+  - name: X-Content-Type-Options
+    lineinfile:
+      path: ~/.bashrc
+      line: add_header X-Content-Type-Options nosniff;
+    notify: Restart Nginx
+  - name: Content Security Policy
+    lineinfile:
+      path: ~/.bashrc
+      line: add_header Content-Security-Policy "default-src 'self';
+    notify: Restart Nginx
   handlers:
   - name: Restart Nginx
     service:

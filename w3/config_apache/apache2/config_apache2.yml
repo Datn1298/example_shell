@@ -27,12 +27,39 @@
     shell: /usr/sbin/a2dissite 000-default.conf
     when: disable_default
     notify: Reload Apache
-  - name:  X-XSS-Protection
+  - name: X-XSS-Protection
     lineinfile:
       path: ~/.bashrc
       line: Header set X-XSS-Protection "1; mode=block"
     notify: Restart Apache
-
+  - name: HTTP Strict Transport Security
+    lineinfile:
+      path: ~/.bashrc
+      line: Header     set    Strict-Transport-Security  "max-age=31536000;includeSubDomains; preload"
+    notify: Restart Apache
+  - name: X-Frame-Options
+    lineinfile:
+      path: ~/.bashrc
+      line: Header always append X-Frame-Options DENY
+    notify: Restart Apache
+  - name: X-Content-Type-Options
+    lineinfile:
+      path: ~/.bashrc
+      line: Header set X-Content-Type-Options nosniff
+    notify: Restart Apache
+  - name: Content Security Policy
+    lineinfile:
+      path: ~/.bashrc
+      line: Header set Content-Security-Policy "default-src 'self';"
+    notify: Restart Apache
+  - name: xxx
+    lineinfile:
+      path: ~/.bashrc
+      line: "{{ item }}"
+    with_item:
+      - ServerSignature Off
+      - ServerTokens Prod
+    notify: Restart Apache
   handlers:
   - name: Restart Apache
     service:
