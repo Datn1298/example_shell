@@ -1,5 +1,5 @@
 ## Thu thập các shell
-## Viết Script
+## Viết Shell Script
 - Thêm, Sửa, Xóa user
 - Cài đặt Apache2, Nginx, PHP, MySQL
 - Cấu hình Apache2, Nginx
@@ -16,3 +16,4 @@
 - Viết Script chạy tự động các playbook
 
 ## Viết Script Hardening OS
+

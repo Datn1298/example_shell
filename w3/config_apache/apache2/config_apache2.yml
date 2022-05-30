@@ -5,13 +5,6 @@
   vars:
     - vars/default.yml
   tasks:
-  - name: Install latest version of Apache
-    apt: name=apache2 update_cache=yes state=latest
-  - name: "UFW firewall allow HTTP on port {{ http_port }}"
-    ufw:
-      rule: allow
-      port: "{{ http_port }}"
-      proto: tcp
   - name: Create document root for your domain
     file:
       path: "/var/www/{{ http_host }}"
@@ -27,19 +20,8 @@
       src: "files/apache.conf.j2"
       dest: "/etc/apache2/sites-available/{{ http_conf }}"
     notify: restart-apache
-  - name: Enable new site
-    shell: /usr/sbin/a2ensite {{ http_conf }}
-    notify: Reload Apache
-  - name: Disable default Apache site
-    shell: /usr/sbin/a2dissite 000-default.conf
-    when: disable_default
-    notify: Reload Apache
   handlers:
   - name: restart-apache
     service:
       name: apache2
       state: restarted
-  - name: Reload Apache
-    service:
-      name: apache2
-      state: reloaded

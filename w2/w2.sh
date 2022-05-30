@@ -64,7 +64,7 @@ edit_file_permission(){
 	read permission
 
 	sed 's/${_path}/'$file'/g' file/edit_file_permission/vars/template.yaml > file/edit_file_permission/vars/default.yaml
-	sed 's/${_permission}/'$permission'/g' file/edit_file_permission/vars/template.yaml > file/edit_file_permission/vars/default.yaml
+	sed 's/${_mode}/'$permission'/g' file/edit_file_permission/vars/template.yaml > file/edit_file_permission/vars/default.yaml
 
 	ansible-playbook file/edit_file_permission.yaml
 }
