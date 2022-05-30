@@ -16,4 +16,9 @@
 - Viết Script chạy tự động các playbook
 
 ## Viết Script Hardening OS
+- Kiểm tra gói sudoers
+- Ngăn chặn dò mật khẩu (done)
+- Cấu hình Apache2 (done)
+- Cấu hình Nginx (done)
+- Cấu hình timestamp cho bash history
 
