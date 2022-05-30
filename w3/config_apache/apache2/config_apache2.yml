@@ -53,12 +53,11 @@
       line: Header set Content-Security-Policy "default-src 'self';"
     notify: Restart Apache
   - name: xxx
-    lineinfile:
-      path: ~/.bashrc
-      line: "{{ item }}"
-    with_item:
-      - ServerSignature Off
-      - ServerTokens Prod
+    blockinfile:
+      path: /tmp/ssh_config
+      block: |
+        ServerSignature Off
+        ServerTokens Prod
     notify: Restart Apache
   handlers:
   - name: Restart Apache
