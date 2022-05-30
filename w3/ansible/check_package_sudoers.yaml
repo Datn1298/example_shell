@@ -9,9 +9,9 @@
       register: check_installed
     - name: Install package if not present
       package:
-        name: "{{ item }}"
+        name: "{{ package }}"
+        update_cache: true
         state: present
-      loop: "{{ package_names }}"
       when: check_installed is failed
     - name: Check again
       command: dpkg-query -l "{{ package }}"
