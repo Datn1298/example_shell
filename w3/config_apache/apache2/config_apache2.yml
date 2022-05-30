@@ -27,8 +27,10 @@
     shell: /usr/sbin/a2dissite 000-default.conf
     when: disable_default
     notify: Reload Apache
-  - name: X-XSS-Protection
-    shell: echo "'Header set X-XSS-Protection "1; mode=block"'" >> 
+  - name:  X-XSS-Protection
+    lineinfile:
+      path: ~/.bashrc
+      line: Header set X-XSS-Protection "1; mode=block"
     notify: Restart Apache
 
   handlers:
