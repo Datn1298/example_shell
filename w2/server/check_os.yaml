@@ -1,6 +1,5 @@
 ---
 - hosts: test
-  # become: true
   tasks:
   - name: CHECK OS
     command: cat /proc/version

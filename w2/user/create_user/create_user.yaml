@@ -1,7 +1,6 @@
 ---
 - hosts: test
   become: yes
-  become_user: datnt
   vars_file:
     - vars/default.yaml
 - tasks:  
