@@ -1,7 +1,6 @@
 ---
 - hosts: test
   become: true
-  become_user: datnt
   vars:
     - vars/default.yml
   tasks:
@@ -11,60 +10,60 @@
       state: directory
       owner: "{{ app_user }}"
       mode: '0755'
-  - name: Copy your index page
-    template:
-      src: "files/index.html.j2"
+  - name: Create index.html
+    file:
       dest: "/var/www/{{ http_host }}/index.html"
+      state: touch
   - name: Set up virtuahHost
     template:
       src: "files/apache.conf.j2"
       dest: "/etc/apache2/sites-available/{{ http_conf }}"
-    notify: Restart Apache
+    notify: restart apache
   - name: Enable new site
     shell: /usr/sbin/a2ensite {{ http_conf }}
-    notify: Reload Apache
+    notify: reload apache
   - name: Disable default Apache site
     shell: /usr/sbin/a2dissite 000-default.conf
     when: disable_default
-    notify: Reload Apache
+    notify: reload apache
   - name: X-XSS-Protection
     lineinfile:
       path: /etc/apache2/apache2.conf
       line: Header set X-XSS-Protection "1; mode=block"
-    notify: Restart Apache
+    notify: restart apache
   - name: HTTP Strict Transport Security
     lineinfile:
       path: /etc/apache2/apache2.conf
       line: Header     set    Strict-Transport-Security  "max-age=31536000;includeSubDomains; preload"
-    notify: Restart Apache
+    notify: restart apache
   - name: X-Frame-Options
     lineinfile:
       path: /etc/apache2/apache2.conf
       line: Header always append X-Frame-Options DENY
-    notify: Restart Apache
+    notify: restart apache
   - name: X-Content-Type-Options
     lineinfile:
       path: /etc/apache2/apache2.conf
       line: Header set X-Content-Type-Options nosniff
-    notify: Restart Apache
+    notify: restart apache
   - name: Content Security Policy
     lineinfile:
       path: /etc/apache2/apache2.conf
       line: Header set Content-Security-Policy "default-src 'self';"
-    notify: Restart Apache
+    notify: restart apache
   - name: xxx
     blockinfile:
       path: /tmp/ssh_config
       block: |
         ServerSignature Off
         ServerTokens Prod
-    notify: Restart Apache
+    notify: restart apache
   handlers:
-  - name: Restart Apache
+  - name: restart apache
     service:
       name: apache2
       state: restarted
-  - name: Reload Apache
+  - name: reload apache
     service:
       name: apache2
       state: reloaded
