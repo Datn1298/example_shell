@@ -1,12 +1,11 @@
 ---
 - hosts: test
   become: true
-  become_user: datnt
   vars_files:
     - vars/default.yaml 
-- tasks:   
-  - name: Remove the user if present in the linux system
-    ansible.builtin.user:
+  tasks:   
+  - name: Delete user
+    user:
       name: "{{ user }}"
       state: absent
       remove: yes

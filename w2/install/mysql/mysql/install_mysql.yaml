@@ -4,7 +4,6 @@
   tasks:
   - name: Install MySQL
     apt: name=mysql-server update_cache=yes  state=lastest
-
   - name: Ensure mysql service is running
     systemd:
       name: mysql

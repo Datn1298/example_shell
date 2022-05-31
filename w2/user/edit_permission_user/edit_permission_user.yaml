@@ -3,8 +3,8 @@
   become: true
   vars_files:
     - vars/default.yaml 
-- tasks:
+  tasks:
   - name: GRANT SUDO PERMISSION FOR USER
-    ansible.builtin.user:
+    user:
       name: "{{ user }}"
-      group: SUDO
+      groups: sudo

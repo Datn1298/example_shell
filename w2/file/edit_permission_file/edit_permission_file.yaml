@@ -4,7 +4,7 @@
   vars:
     - vars/default.yaml 
   tasks:
-  - name: CHANGE FILE PERMISSION
-    ansible.builtin.file:
+  - name: Change file's permission
+    file:
       path: "{{ path }}"
       mode: "{{ mode }}"

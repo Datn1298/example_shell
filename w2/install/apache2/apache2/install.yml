@@ -18,10 +18,10 @@
       state: directory
       owner: "{{ app_user }}"
       mode: '0755'
-  - name: Copy your index page
-    template:
-      src: "files/index.html.j2"
+  - name: Create index.html
+    file:
       dest: "/var/www/{{ http_host }}/index.html"
+      state: touch
   - name: Set up virtuahHost
     template:
       src: "files/apache.conf.j2"
