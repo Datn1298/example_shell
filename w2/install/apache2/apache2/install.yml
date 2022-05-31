@@ -1,7 +1,6 @@
 ---
 - hosts: test
   become: true
-  become_user: datnt
   vars:
     - vars/default.yml
   tasks:
@@ -26,20 +25,20 @@
     template:
       src: "files/apache.conf.j2"
       dest: "/etc/apache2/sites-available/{{ http_conf }}"
-    notify: restart-apache
+    notify: restart apache
   - name: Enable new site
     shell: /usr/sbin/a2ensite {{ http_conf }}
-    notify: Reload Apache
+    notify: reload apache
   - name: Disable default Apache site
     shell: /usr/sbin/a2dissite 000-default.conf
     when: disable_default
-    notify: Reload Apache
+    notify: reload apache
   handlers:
-  - name: restart-apache
+  - name: restart apache
     service:
       name: apache2
       state: restarted
-  - name: Reload Apache
+  - name: reload apache
     service:
       name: apache2
       state: reloaded
