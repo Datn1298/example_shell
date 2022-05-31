@@ -21,25 +21,26 @@
       mode: '0755'
 
   - name: Copy your index page
-    template:
-      src: "files/index.html.j2"
-      dest: "/var/www/{{ http_host }}/html/index.html"
+    file:
+      path: "/var/www/{{ http_host }}/html/index.html"
+      state: touch
 
   - name: Set up virtuahHost
     template:
-      src: "files/nginx.conf.j2"
-      dest: "/etc/nginx/sites-available/{{ http_conf }}"
-    notify: Restart Nginx
+      src: "file/nginx.conf.j2"
+      dest: "/etc/nginx/sites-available/default"
+    notify: restart nginx
 
   - name: Enable new site
     file:
-      src: /etc/nginx/sites-available/
-      dest: /etc/nginx/sites-enabled/
+      src: /etc/nginx/sites-available/default
+      dest: /etc/nginx/sites-enabled/default
       state: link
-    notify: Restart Nginx
+    become: true
+    notify: restart nginx
 
   handlers:
-  - name: Restart Nginx
+  - name: restart nginx
     service:
       name: nginx
       state: restarted

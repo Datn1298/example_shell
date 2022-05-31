@@ -5,8 +5,7 @@
   - name: Install software-properties-common
     apt: name=software-properties-common
   - name: Repo PHP 7.4
-    apt_repository:
-      repo="ppa:ondrej/php"
+    apt_repository: repo="ppa:ondrej/php"
   - name: Install PHP7.4
     apt: name=php7.4 update_cache=yes state=present
   - name: Install package
