@@ -31,7 +31,6 @@
     notify: reload apache
   - name: Disable default Apache site
     shell: /usr/sbin/a2dissite 000-default.conf
-    when: disable_default
     notify: reload apache
   handlers:
   - name: restart apache
