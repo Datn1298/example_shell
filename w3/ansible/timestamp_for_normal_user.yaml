@@ -1,13 +1,19 @@
 ---
 - hosts: test
   become: true
-  become_user: datnt
-- tasks:
-  - name: Create folder
+  tasks:
+  - name: Create folder /var/log/users_history/
     file:
       path: /var/log/users_history/
       state: directory
-  - name: Config ~/.bashrc
+  - name: Grant Permission for new folder
+    shell: chmod +t /var/log/users_history/
+  - name: Create file shell and grant permission for new shell 
+    file:
+      path: /etc/profile.d/users_history.sh
+      state: touch
+      mode: 0770
+  - name: Config shell
     blockinfile:
       path: /etc/profile.d/users_history.sh
       block: |
@@ -20,9 +26,5 @@
         export HISTFILE=/var/log/users_history/history-users-$(who am I | awk '{print $1}';exit)-$(date +%F)
         export PROMPT_COMMAND='history -a'
         fi
-  - name: Grant Permission 
-    ansible.builtin.file:
-      path: /etc/profile.d/users_history.sh
-      mode: 0770
   - name: source /etc/profile.d/users_history.sh
     shell: source /etc/profile.d/users_history.sh

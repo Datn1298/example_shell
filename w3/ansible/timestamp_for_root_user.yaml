@@ -1,9 +1,8 @@
 ---
 - hosts: test
   become: true
-  become_user: datnt
 - tasks:
-  - name: Create folder
+  - name: Create folder /var/log/sudo_history/
     file:
       path: /var/log/sudo_history/
       state: directory
@@ -16,4 +15,4 @@
         export HISTFILE=/var/log/sudo_history/history-sudo-$(who am I | awk '{print $1}';exit)-$(date +%F)
         export PROMPT_COMMAND='history -a'
   - name: source /root/.bashrc
-    shell: source /root/.bashrc
+    script: /root/.bashrc
