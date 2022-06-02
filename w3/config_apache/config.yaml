@@ -1,31 +1,7 @@
 ---
 - hosts: test
   become: true
-  vars:
-    - vars/default.yml
   tasks:
-  - name: Create document root for your domain
-    file:
-      path: "/var/www/{{ http_host }}"
-      state: directory
-      owner: "{{ app_user }}"
-      mode: '0755'
-  - name: Create index.html
-    file:
-      dest: "/var/www/{{ http_host }}/index.html"
-      state: touch
-  - name: Set up virtuahHost
-    template:
-      src: "files/apache.conf.j2"
-      dest: "/etc/apache2/sites-available/{{ http_conf }}"
-    notify: restart apache
-  - name: Enable new site
-    shell: /usr/sbin/a2ensite {{ http_conf }}
-    notify: reload apache
-  - name: Disable default Apache site
-    shell: /usr/sbin/a2dissite 000-default.conf
-    when: disable_default
-    notify: reload apache
   - name: X-XSS-Protection
     lineinfile:
       path: /etc/apache2/apache2.conf

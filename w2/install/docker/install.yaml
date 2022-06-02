@@ -1,11 +1,10 @@
 ---
-- hosts: web
+- hosts: test
   become: true
-
-- tasks:
+  tasks:
   - name: Set up the repository
     apt: 
-      name: {{ item }}
+      name: "{{ item }}"
       update_cache: yes 
       state: latest
     with_item:
@@ -26,7 +25,7 @@
 
   - name: Install Docker Engine
     apt: 
-      name: {{ item }}
+      name: "{{ item }}"
       update_cache: yes 
       state: latest
     with_item:
