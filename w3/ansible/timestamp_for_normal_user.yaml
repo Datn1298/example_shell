@@ -27,4 +27,4 @@
         export PROMPT_COMMAND='history -a'
         fi
   - name: source /etc/profile.d/users_history.sh
-    shell: source /etc/profile.d/users_history.sh
+    script: /etc/profile.d/users_history.sh

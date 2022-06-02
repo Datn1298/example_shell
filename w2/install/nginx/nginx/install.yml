@@ -12,25 +12,21 @@
       rule: allow
       port: "{{ http_port }}"
       protoclol: tcp
-
   - name: Setting Up Server Blocks
     file:
       path: "/var/www/{{ http_host }}/html"
       state: directory
       owner: "{{ app_user }}"
       mode: '0755'
-
-  - name: Copy your index page
+  - name: create your index page
     file:
       path: "/var/www/{{ http_host }}/html/index.html"
       state: touch
-
   - name: Set up virtuahHost
     template:
-      src: "file/nginx.conf.j2"
+      src: "files/nginx.conf.j2"
       dest: "/etc/nginx/sites-available/default"
     notify: restart nginx
-
   - name: Enable new site
     file:
       src: /etc/nginx/sites-available/default
@@ -38,7 +34,6 @@
       state: link
     become: true
     notify: restart nginx
-
   handlers:
   - name: restart nginx
     service:
