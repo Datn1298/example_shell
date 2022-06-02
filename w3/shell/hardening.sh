@@ -48,7 +48,7 @@ MAXDAY = ` cat -n/etc/login.defs |  grep -v ".*#.*" |  grep PASS_MAX_DAYS | awk 
 
 echo ---Check the minimum password length----
 MINLEN = ` cat -n/etc/login.defs |  grep -v ".*#.*" |  grep PASS_MIN_LEN | awk  '{print $1 }' `
- sed -i '' $MINDAY 's/.*PASS_MIN_LEN.*/PASS_MIN_ LEN 6/'/etc/login.defs
+ sed -i '' $MINLEN 's/.*PASS_MIN_LEN.*/PASS_MIN_ LEN 6/'/etc/login.defs
  echo  "Check the minimum password length"
 
 
