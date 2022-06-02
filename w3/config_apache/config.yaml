@@ -2,6 +2,9 @@
 - hosts: test
   become: true
   tasks:
+  - name: Enable mod header
+    shell: /usr/sbin/a2enmod headers
+    notify: restart apache
   - name: X-XSS-Protection
     lineinfile:
       path: /etc/apache2/apache2.conf
@@ -43,7 +46,3 @@
     service:
       name: apache2
       state: restarted
-  - name: reload apache
-    service:
-      name: apache2
-      state: reloaded
