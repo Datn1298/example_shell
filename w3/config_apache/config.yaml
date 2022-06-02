@@ -27,13 +27,18 @@
       path: /etc/apache2/apache2.conf
       line: Header set Content-Security-Policy "default-src 'self';"
     notify: restart apache
+  # - name: ServerSignature & ServerTokens
+  #   blockinfile:
+  #     path: /tmp/ssh_config
+  #     block: |
+  #       ServerSignature Off
+  #       ServerTokens Prod
+  #   notify: restart apache
   - name: xxx
-    blockinfile:
-      path: /tmp/ssh_config
-      block: |
-        ServerSignature Off
-        ServerTokens Prod
-    notify: restart apache
+    replace:
+      path: /etc/apache2/conf-available/security.conf
+      regexp: 'ServerSignature*'
+      replace: "ServerSignature Off"
   handlers:
   - name: restart apache
     service:
