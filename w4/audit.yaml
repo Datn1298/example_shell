@@ -1,9 +1,23 @@
 ---
 - hosts: test
-  remote_user: root
-  vars:
-    - package: sudo
+  become: true
   tasks:
-  - name: Check package sudo is installed or not
-    command: dpkg-query -l apache2
-    register: check_installed
+  - name: Get package information
+    package_facts:
+      manager: "auto"
+  - name: "Apache result"
+    debug:
+      msg: "Apache found"
+    when: 
+      - ansible_facts['os_family'] == "RedHat"
+      - "'httpd' in ansible_facts.packages"
+  - name: "Apache result"
+    debug:
+      msg: "Apache found"
+    when: 
+      - ansible_facts['os_family'] == "Debian"
+      - "'apache2' in ansible_facts.packages"
+  - name: "Nginx result"
+    debug:
+        msg: "Nginx found"
+    when: "'nginx' in ansible_facts.packages"
