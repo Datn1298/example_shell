@@ -5,15 +5,15 @@
   - name: Get package information
     package_facts:
       manager: "auto"
-  - name: "Apache result"
+  - name: Check Apache is installed or not if OS is RedHat
     debug:
-      msg: "Apache found"
+      msg: "Apache is installed"
     when: 
       - ansible_facts['os_family'] == "RedHat"
       - "'httpd' in ansible_facts.packages"
-  - name: "Apache result"
+  - name: Check Apache is installed or not if OS is Debian
     debug:
-      msg: "Apache found"
+      msg: "Apache is installed"
     when: 
       - ansible_facts['os_family'] == "Debian"
       - "'apache2' in ansible_facts.packages"

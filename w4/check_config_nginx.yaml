@@ -1,0 +1,11 @@
+---
+- hosts: test
+  become: true
+  tasks:
+  - name: Get package information
+    package_facts:
+      manager: "auto"
+  - name: Check Apache is installed or not
+    debug:
+      msg: "Apache is installed"
+    when: "'nginx' in ansible_facts.packages"
