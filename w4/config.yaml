@@ -12,3 +12,5 @@ http_strict_transport_security_nginx: add_header       Strict-Transport-Security
 x-frame-options_nginx: add_header X-Frame-Options "DENY";
 x-content-type-options_nginx: add_header X-Content-Type-Options nosniff;
 content-security-policy_nginx: add_header Content-Security-Policy "default-src 'self'";
+common-password_debian: "password   requisite   pam_cracklib.so   try_first_pass   retry=3 minlength=12 lcredit=1 ucredit=1 dcredit=1 ocredit=1 difok=4"
+system-auth_redhat: "password    requisite     pam_cracklib.so try_first_pass retry=3"
