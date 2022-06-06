@@ -17,7 +17,3 @@
     when: 
       - ansible_facts['os_family'] == "Debian"
       - "'apache2' in ansible_facts.packages"
-  - name: "Nginx result"
-    debug:
-        msg: "Nginx found"
-    when: "'nginx' in ansible_facts.packages"
