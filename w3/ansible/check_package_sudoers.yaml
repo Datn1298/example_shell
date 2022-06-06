@@ -17,5 +17,4 @@
     command: dpkg-query -l "{{ package }}"
     register: check2_installed 
   - name: Result
-    debug: var=check2_installed.stdout_lines
-
+    debug: var=check2_installed.stdout

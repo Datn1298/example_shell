@@ -1,0 +1,2 @@
+permit_root_login: "PermitRootLogin no"
+password_authentication: "Password Authentication no"

@@ -21,3 +21,27 @@
     debug:
         msg: "Nginx found"
     when: "'nginx' in ansible_facts.packages"
+
+  - name: check config Password Authentication
+    shell: cat /etc/ssh/sshd_config | grep "^Password Authentication no"
+    register: config_password_authentication
+  - name: abc 
+    debug:
+      msg: "abc"
+    when: config_password_authentication == password_authentication
+
+  - name: check config PermitRootLogin
+    shell: cat /etc/ssh/sshd_config | grep "^PermitRootLogin.*"
+    register: config_permitrootlogin
+  - name: def
+    debug:
+      msg: "def"
+    when: config_permitrootlogin == permit_root_login
+
+  - name: count file /var/log/users_history/
+    shell: ls /var/log/users_history/ | wc -l
+    register: number_file
+  - name: fff
+    debug:
+      msg: "fff"
+    when: number_file.stdout == 0
