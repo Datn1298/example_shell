@@ -4,10 +4,14 @@
   vars:
     - package: sudo
   tasks:
-  - name: Check package sudo is installed or not
-    command: dpkg-query -l "{{ package }}"
-    register: check_installed
-  - name: 
+  - name: Get package information
+    package_facts:
+      manager: "auto"
+  - name: Check Package Sudo is installed or not
     debug:
-      msg: "Package Sudo isn't installed"
-    when: check_installed is failed
+      msg: "Sudo is installed"
+    when: "'sudo' in ansible_facts.packages"
+  - name: Check Package Sudo is installed or not
+    debug:
+      msg: "Sudo isn't installed"
+    when: "'sudo' not in ansible_facts.packages"
