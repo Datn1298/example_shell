@@ -45,3 +45,13 @@
     debug:
       msg: "fff"
     when: number_file.stdout == 0
+
+  - name: count file /var/log/sudo_history/
+    shell: ls /var/log/sudo_history/ | wc -l
+    register: number_file2
+  - name: fff
+    debug:
+      msg: "fff"
+    when: number_file2.stdout == 0
+
+  

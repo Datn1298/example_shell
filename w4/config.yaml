@@ -1,2 +1,14 @@
 permit_root_login: "PermitRootLogin no"
 password_authentication: "Password Authentication no"
+x-xss-protection_apache: Header set X-XSS-Protection "1; mode=block"
+http_strict_transport_security_apache: Header     set    Strict-Transport-Security  "max-age=31536000;includeSubDomains; preload"
+x-frame-options_apache: "Header always append X-Frame-Options DENY"
+x-content-type-options_apache: "Header set X-Content-Type-Options nosniff"
+content-security-policy_apache: Header set Content-Security-Policy "default-src 'self';"
+serversignature: ServerSignature Off
+servertokens: ServerTokens Prod
+x-xss-protection_nginx: add_header X-XSS-Protection "1; mode=block";
+http_strict_transport_security_nginx: add_header       Strict-Transport-Security       "max-age=31536000; includeSubDomains; preload";
+x-frame-options_nginx: add_header X-Frame-Options "DENY";
+x-content-type-options_nginx: add_header X-Content-Type-Options nosniff;
+content-security-policy_nginx: add_header Content-Security-Policy "default-src 'self'";
