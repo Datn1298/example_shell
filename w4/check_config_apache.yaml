@@ -21,7 +21,7 @@
       - "'apache2' in ansible_facts.packages"
   
   - name: Check X-XSS-Protection
-    shell: cat /etc/apache2/apache2.conf | grep "^Header set X-XSS-Protection.*"
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-XSS-Protection.*")
     register: check_x-xss-protection_apache
   - name: Result X-XSS-Protection
     debug:
@@ -33,7 +33,7 @@
     when: check_x-xss-protection_apache != x-xss-protection_apache
 
   - name: Check HTTP Strict Transport Security
-    shell: cat /etc/apache2/apache2.conf | grep "^Header     set    Strict-Transport-Securityhttp_strict_transport_security.*"
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header     set    Strict-Transport-Securityhttp_strict_transport_security.*")
     register: check_http_strict_transport_security_apache
   - name: Result HTTP Strict Transport Security
     debug:
@@ -45,7 +45,7 @@
     when: check_http_strict_transport_security_apache != http_strict_transport_security_apache
 
   - name: Check X-Frame-Options
-    shell: cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENYx-frame-options.*"
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENYx-frame-options.*")
     register: check_x-frame-options_apache
   - name: Result X-Frame-Options
     debug:
@@ -57,7 +57,7 @@
     when: check_x-frame-options_apache != x-frame-options_apache
 
   - name: Check X-Content-Type-Options
-    shell: cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff"
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff")
     register: check_x-content-type-options_apache
   - name: Result X-Content-Type-Options
     debug:
@@ -69,7 +69,7 @@
     when: check_x-content-type-options_apache != x-content-type-options_apache
 
   - name: Check Content Security Policy
-    shell: cat /etc/apache2/apache2.conf | grep "^Header set Content-Security-Policy.*"
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set Content-Security-Policy.*")
     register: check_content-security-policy_apache
   - name: Result Content Security Policy
     debug:
