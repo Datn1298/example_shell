@@ -44,14 +44,38 @@
       msg: "HTTP Strict Transport Security isn't configured"
     when: check_http_strict_transport_security_apache != http_strict_transport_security_apache
 
-  - name: Check X-XSS-Protection
-    shell: cat /etc/apache2/apache2.conf | grep "^Header set X-XSS-Protection.*"
-    register: check_x-xss-protection_apache
-  - name: Result X-XSS-Protection
+  - name: Check X-Frame-Options
+    shell: cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENYx-frame-options.*"
+    register: check_x-frame-options_apache
+  - name: Result X-Frame-Options
     debug:
-      msg: "X-XSS-Protection is configured"
-    when: check_x-xss-protection_apache == x-xss-protection_apache
-  - name: Result X-XSS-Protection
+      msg: "X-Frame-Options is configured"
+    when: check_x-frame-options_apache == x-frame-options_apache
+  - name: Result X-Frame-Options
     debug:
-      msg: "X-XSS-Protection isn't configured"
-    when: check_x-xss-protection_apache != x-xss-protection_apache
+      msg: "X-Frame-Options isn't configured"
+    when: check_x-frame-options_apache != x-frame-options_apache
+
+  - name: Check X-Content-Type-Options
+    shell: cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff"
+    register: check_x-content-type-options_apache
+  - name: Result X-Content-Type-Options
+    debug:
+      msg: "X-Content-Type-Options is configured"
+    when: check_x-content-type-options_apache == x-content-type-options_apache
+  - name: Result X-Content-Type-Options
+    debug:
+      msg: "X-Content-Type-Options isn't configured"
+    when: check_x-content-type-options_apache != x-content-type-options_apache
+
+  - name: Check Content Security Policy
+    shell: cat /etc/apache2/apache2.conf | grep "^Header set Content-Security-Policy.*"
+    register: check_content-security-policy_apache
+  - name: Result Content Security Policy
+    debug:
+      msg: "Content Security Policy is configured"
+    when: check_content-security-policy_apache == content-security-policy_apache
+  - name: Result Content Security Policy
+    debug:
+      msg: "Content Security Policy isn't configured"
+    when: check_content-security-policy_apache != content-security-policy_apache
