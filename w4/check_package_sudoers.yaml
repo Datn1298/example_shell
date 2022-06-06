@@ -1,0 +1,13 @@
+---
+- hosts: test
+  remote_user: root
+  vars:
+    - package: sudo
+  tasks:
+  - name: Check package sudo is installed or not
+    command: dpkg-query -l "{{ package }}"
+    register: check_installed
+  - name: 
+    debug:
+      msg: "Package Sudo isn't installed"
+    when: check_installed is failed
