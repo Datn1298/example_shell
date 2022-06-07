@@ -1,5 +1,10 @@
+# config password
+common_password_debian: password requisite pam_cracklib.so try_first_pass retry=3 minlength=12 lcredit=1 ucredit=1 dcredit=1 ocredit=1 difok=4
+system_auth_redhat: password requisite pam_cracklib.so try_first_pass retry=3
 permit_root_login: "PermitRootLogin no"
 password_authentication: "Password Authentication no"
+
+# config apache
 x-xss-protection_apache: Header set X-XSS-Protection "1; mode=block"
 http_strict_transport_security_apache: Header     set    Strict-Transport-Security  "max-age=31536000;includeSubDomains; preload"
 x-frame-options_apache: "Header always append X-Frame-Options DENY"
@@ -7,10 +12,12 @@ x-content-type-options_apache: "Header set X-Content-Type-Options nosniff"
 content-security-policy_apache: Header set Content-Security-Policy "default-src 'self';"
 serversignature: ServerSignature Off
 servertokens: ServerTokens Prod
+
+# config nginx
 x-xss-protection_nginx: add_header X-XSS-Protection "1; mode=block";
 http_strict_transport_security_nginx: add_header       Strict-Transport-Security       "max-age=31536000; includeSubDomains; preload";
 x-frame-options_nginx: add_header X-Frame-Options "DENY";
 x-content-type-options_nginx: add_header X-Content-Type-Options nosniff;
 content-security-policy_nginx: add_header Content-Security-Policy "default-src 'self'";
-common_password_debian: password requisite pam_cracklib.so try_first_pass retry=3 minlength=12 lcredit=1 ucredit=1 dcredit=1 ocredit=1 difok=4
-system_auth_redhat: password requisite pam_cracklib.so try_first_pass retry=3
+
+# config timestamps
