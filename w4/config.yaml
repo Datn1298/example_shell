@@ -1,8 +1,8 @@
 # config password
 common_password_debian: password requisite pam_cracklib.so try_first_pass retry=3 minlength=12 lcredit=1 ucredit=1 dcredit=1 ocredit=1 difok=4
 system_auth_redhat: password requisite pam_cracklib.so try_first_pass retry=3
-permit_root_login: "PermitRootLogin no"
-password_authentication: "Password Authentication no"
+permit_root_login: PermitRootLogin no
+password_authentication: Password Authentication no
 
 # config apache
 x-xss-protection_apache: Header set X-XSS-Protection "1; mode=block"
