@@ -33,7 +33,7 @@
     when: check_x-xss-protection_apache != x-xss-protection_apache
 
   - name: Check HTTP Strict Transport Security
-    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header     set    Strict-Transport-Securityhttp_strict_transport_security.*")
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set Strict-Transport-Security.*")
     register: check_http_strict_transport_security_apache
   - name: Result HTTP Strict Transport Security
     debug:
