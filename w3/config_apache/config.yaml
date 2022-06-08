@@ -13,7 +13,7 @@
   - name: HTTP Strict Transport Security
     lineinfile:
       path: /etc/apache2/apache2.conf
-      line: Header     set    Strict-Transport-Security  "max-age=31536000;includeSubDomains; preload"
+      line: Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     notify: restart apache
   - name: X-Frame-Options
     lineinfile:
