@@ -45,7 +45,7 @@
     when: check_http_strict_transport_security_apache != http_strict_transport_security_apache
 
   - name: Check X-Frame-Options
-    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENY.*")
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options.*")
     register: check_x_frame_options_apache
   - name: Result X-Frame-Options
     debug:
@@ -57,7 +57,7 @@
     when: check_x_frame_options_apache != x_frame_options_apache
 
   - name: Check X-Content-Type-Options
-    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff.*")
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options.*")
     register: check_x_content_type_options_apache
   - name: Result X-Content-Type-Options
     debug:

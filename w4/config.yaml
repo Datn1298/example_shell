@@ -7,8 +7,8 @@ password_authentication: Password Authentication no
 # config apache
 x_xss_protection_apache: Header set X-XSS-Protection "1; mode=block"
 http_strict_transport_security_apache: Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-x_frame_options_apache: "Header always append X-Frame-Options DENY"
-x_content_type-options_apache: "Header set X-Content-Type-Options nosniff"
+x_frame_options_apache: Header always append X-Frame-Options DENY
+x_content_type-options_apache: Header set X-Content-Type-Options nosniff
 content_security_policy_apache: Header set Content-Security-Policy "default-src 'self';"
 serversignature: ServerSignature Off
 servertokens: ServerTokens Prod
