@@ -12,15 +12,15 @@
 
   - name: Check X-XSS-Protection
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-XSS-Protection.*")
-    register: check_x-xss-protection_nginx
+    register: check_x_xss_protection_nginx
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection is configured"
-    when: check_x-xss-protection_nginx == x-xss-protection_nginx
+    when: check_x_xss_protection_nginx == x_xss_protection_nginx
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection isn't configured"
-    when: check_x-xss-protection_nginx != x-xss-protection_nginx
+    when: check_x_xss_protection_nginx != x_xss_protection_nginx
 
   - name: Check HTTP Strict Transport Security
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header     set    Strict-Transport-Securityhttp_strict_transport_security.*")
@@ -36,36 +36,36 @@
 
   - name: Check X-Frame-Options
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENY.*")
-    register: check_x-frame-options_nginx
+    register: check_x_frame_options_nginx
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options is configured"
-    when: check_x-frame-options_nginx == x-frame-options_nginx
+    when: check_x_frame_options_nginx == x_frame_options_nginx
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options isn't configured"
-    when: check_x-frame-options_nginx != x-frame-options_nginx
+    when: check_x_frame_options_nginx != x_frame_options_nginx
 
   - name: Check X-Content-Type-Options
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff")
-    register: check_x-content-type-options_nginx
+    register: check_x_content_type_options_nginx
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options is configured"
-    when: check_x-content-type-options_nginx == x-content-type-options_nginx
+    when: check_x_content_type_options_nginx == x_content_type_options_nginx
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options isn't configured"
-    when: check_x-content-type-options_nginx != x-content-type-options_nginx
+    when: check_x_content_type_options_nginx != x_content_type_options_nginx
 
   - name: Check Content Security Policy
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set Content-Security-Policy.*")
-    register: check_content-security-policy_nginx
+    register: check_content_security_policy_nginx
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy is configured"
-    when: check_content-security-policy_nginx == content-security-policy_nginx
+    when: check_content_security_policy_nginx == content_security_policy_nginx
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy isn't configured"
-    when: check_content-security-policy_nginx != content-security-policy_nginx
+    when: check_content_security_policy_nginx != content_security_policy_nginx

@@ -22,15 +22,15 @@
   
   - name: Check X-XSS-Protection
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-XSS-Protection.*")
-    register: check_x-xss-protection_apache
+    register: check_x_xss_protection_apache
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection is configured"
-    when: check_x-xss-protection_apache == x-xss-protection_apache
+    when: check_x_xss_protection_apache == x_xss_protection_apache
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection isn't configured"
-    when: check_x-xss-protection_apache != x-xss-protection_apache
+    when: check_x_xss_protection_apache != x_xss_protection_apache
 
   - name: Check HTTP Strict Transport Security
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set Strict-Transport-Security.*")
@@ -45,37 +45,37 @@
     when: check_http_strict_transport_security_apache != http_strict_transport_security_apache
 
   - name: Check X-Frame-Options
-    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENYx-frame-options.*")
-    register: check_x-frame-options_apache
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header always append X-Frame-Options DENY.*")
+    register: check_x_frame_options_apache
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options is configured"
-    when: check_x-frame-options_apache == x-frame-options_apache
+    when: check_x_frame_options_apache == x_frame_options_apache
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options isn't configured"
-    when: check_x-frame-options_apache != x-frame-options_apache
+    when: check_x_frame_options_apache != x_frame_options_apache
 
   - name: Check X-Content-Type-Options
-    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff")
-    register: check_x-content-type-options_apache
+    shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set X-Content-Type-Options nosniff.*")
+    register: check_x_content_type_options_apache
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options is configured"
-    when: check_x-content-type-options_apache == x-content-type-options_apache
+    when: check_x_content_type_options_apache == x_content_type_options_apache
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options isn't configured"
-    when: check_x-content-type-options_apache != x-content-type-options_apache
+    when: check_x_content_type_options_apache != x_content_type_options_apache
 
   - name: Check Content Security Policy
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set Content-Security-Policy.*")
-    register: check_content-security-policy_apache
+    register: check_content_security_policy_apache
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy is configured"
-    when: check_content-security-policy_apache == content-security-policy_apache
+    when: check_content_security_policy_apache == content_security_policy_apache
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy isn't configured"
-    when: check_content-security-policy_apache != content-security-policy_apache
+    when: check_content_security_policy_apache != content_security_policy_apache
