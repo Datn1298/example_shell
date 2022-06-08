@@ -4,18 +4,53 @@
   vars_files:
     config.yaml
   tasks:
-  - name: count file /var/log/users_history/
+  - name: check file /var/log/users_history/ is exist or not
+    shell: echo $(ls /var/log | grep "users_history")
+    register: check_exist
+  - name: if not exist
+    debug:
+      msg: "Not configured timestamps for normal user yet"
+    when: check_exist.stdout == ""
+  - name: count file /var/log/users_history/ if exist
     shell: echo $(ls /var/log/users_history/ | wc -l)
     register: number_file
-  - name: fff
+    when: check_exist.stdout != ""
+  - name: Result
     debug:
-      msg: "fff"
-    when: number_file.stdout == 0
+      msg: "Configured timestamps for normal user"
+    when: number_file.stdout > 0
+  - name: Count number login
+    shell: echo $(last | wc -l)
+    register: number_login
+  - name: Result
+    debug:
+      msg: "Not configured timestamps for normal user yet"
+    when: 
+      - number_file.stdout == 0
+      - number_login > 0
 
-  - name: count file /var/log/sudo_history/
-    shell: echo $(ls /var/log/sudo_history/ | wc -l)
-    register: number_file2
-  - name: fff
+
+  - name: check file /var/log/sudo_history/ is exist or not
+    shell: echo $(ls /var/log | grep "sudo_history")
+    register: check_exist2
+  - name: if not exist
     debug:
-      msg: "fff"
-    when: number_file2.stdout == 0
+      msg: "Not configured timestamps for root user yet"
+    when: check_exist2.stdout == ""
+  - name: count file /var/log/sudo_history/ if exist
+    shell: echo $(ls /var/log/sudo_history/ | wc -l)
+    register: number_file
+    when: check_exist2.stdout != ""
+  - name: Result
+    debug:
+      msg: "Configured timestamps for root user"
+    when: number_file2.stdout > 0
+  - name: Count number login
+    shell: echo $(last | wc -l)
+    register: number_login
+  - name: Result
+    debug:
+      msg: "Not configured timestamps for normal user yet"
+    when: 
+      - number_file.stdout == 0
+      - number_login > 0
