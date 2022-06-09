@@ -15,7 +15,7 @@ servertokens: ServerTokens Prod
 
 # config nginx
 x_xss_protection_nginx: add_header X-XSS-Protection "1; mode=block";
-http_strict_transport_security_nginx: add_header Strict-Transport-Security= "max-age=31536000; includeSubDomains; preload";
+http_strict_transport_security_nginx: add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
 x_frame_options_nginx: add_header X-Frame-Options "DENY";
 x_content_type_options_nginx: add_header X-Content-Type-Options nosniff;
 content_security_policy_nginx: add_header Content-Security-Policy "default-src 'self'";

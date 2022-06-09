@@ -1,35 +1,51 @@
 ---
 - hosts: test
   become: true
+
   tasks:
-  - name: Set up the repository
-    apt: 
+  - name: remove old versions
+    apt:
       name: "{{ item }}"
-      update_cache: yes 
-      state: latest
-    with_item:
-      - ca-certificates
-      - curl
-      - gnupg
-      - lsb-release
-    
-  - name: Add Docker's official GPG key
-    apt-key:
+      state: absent
+    loop:
+    - docker
+    - docker-engine
+    - docker.io
+    - containerd runc
+  - name: install dependencies
+    apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+
+  - name: add GPG key
+    apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
 
-  - name: Add Docker Repository
+  - name: add docker repository to apt
     apt_repository:
       repo: deb https://download.docker.com/linux/ubuntu focal stable
       state: present
 
-  - name: Install Docker Engine
-    apt: 
+  - name: install docker
+    apt:
       name: "{{ item }}"
-      update_cache: yes 
       state: latest
-    with_item:
+      update_cache: yes
+    loop:
       - docker-ce
       - docker-ce-cli
       - containerd.io
-      - docker-compose-plugin
+
+  - name: check docker status
+    service:
+      name: docker
+      state: started
+      enabled: yes

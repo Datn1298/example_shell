@@ -18,7 +18,7 @@
   - name: Result
     debug:
       msg: "Configured timestamps for normal user"
-    when: number_file.stdout > 0
+    when: number_file.stdout != "0"
   - name: Count number login
     shell: echo $(last | wc -l)
     register: number_login
@@ -26,8 +26,8 @@
     debug:
       msg: "Not configured timestamps for normal user yet"
     when: 
-      - number_file.stdout == 0
-      - number_login > 0
+      - number_file.stdout == "0"
+      - number_login.stdout != "0"
 
 
   - name: check file /var/log/sudo_history/ is exist or not
@@ -44,4 +44,4 @@
   - name: Result
     debug:
       msg: "Configured timestamps for root user"
-    when: number_file2.stdout > 0
+    when: number_file2.stdout != "0"
