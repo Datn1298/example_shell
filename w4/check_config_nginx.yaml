@@ -7,7 +7,7 @@
       manager: "auto"
   - name: Check Nginx is installed or not
     debug:
-      msg: "Apache is installed"
+      msg: "Nginx is installed"
     when: "'nginx' in ansible_facts.packages"
 
   - name: Check X-XSS-Protection
@@ -16,11 +16,15 @@
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection is configured"
-    when: check_x_xss_protection_nginx == x_xss_protection_nginx
+    when:
+      - "'nginx' in ansible_facts.packages"
+      - check_x_xss_protection_nginx.stdout == x_xss_protection_nginx
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection isn't configured"
-    when: check_x_xss_protection_nginx != x_xss_protection_nginx
+    when:
+      - "'nginx' in ansible_facts.packages"
+      - check_x_xss_protection_nginx.stdout != x_xss_protection_nginx
 
   - name: Check HTTP Strict Transport Security
     shell: echo $(cat /etc/nginx/sites-available/default | grep "^add_header Strict-Transport-Security.*")
@@ -28,11 +32,15 @@
   - name: Result HTTP Strict Transport Security
     debug:
       msg: "HTTP Strict Transport Security is configured"
-    when: check_http_strict_transport_security_nginx == http_strict_transport_security_nginx
+    when:
+      - "'nginx' in ansible_facts.packages"
+      - check_http_strict_transport_security_nginx.stdout == http_strict_transport_security_nginx
   - name: Result HTTP Strict Transport Security
     debug:
       msg: "HTTP Strict Transport Security isn't configured"
-    when: check_http_strict_transport_security_nginx != http_strict_transport_security_nginx
+    when:
+      - "'nginx' in ansible_facts.packages"
+      - check_http_strict_transport_security_nginx.stdout != http_strict_transport_security_nginx
 
   - name: Check X-Frame-Options
     shell: echo $(cat /etc/nginx/sites-available/default | grep "^add_header X-Frame-Options.*")
@@ -40,11 +48,15 @@
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options is configured"
-    when: check_x_frame_options_nginx == x_frame_options_nginx
+    when: 
+      - "'nginx' in ansible_facts.packages"
+      - check_x_frame_options_nginx.stdout == x_frame_options_nginx
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options isn't configured"
-    when: check_x_frame_options_nginx != x_frame_options_nginx
+    when: 
+      - "'nginx' in ansible_facts.packages"
+      - check_x_frame_options_nginx.stdout != x_frame_options_nginx
 
   - name: Check X-Content-Type-Options
     shell: echo $(cat /etc/nginx/sites-available/default | grep "^add_header X-Content-Type-Options.*")
@@ -52,11 +64,15 @@
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options is configured"
-    when: check_x_content_type_options_nginx == x_content_type_options_nginx
+    when: 
+      - "'nginx' in ansible_facts.packages"
+      - check_x_content_type_options_nginx.stdout == x_content_type_options_nginx
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options isn't configured"
-    when: check_x_content_type_options_nginx != x_content_type_options_nginx
+    when: 
+      - "'nginx' in ansible_facts.packages" 
+      - check_x_content_type_options_nginx.stdout != x_content_type_options_nginx
 
   - name: Check Content Security Policy
     shell: echo $(cat /etc/nginx/sites-available/default | grep "^add_header Content-Security-Policy.*")
@@ -64,8 +80,12 @@
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy is configured"
-    when: check_content_security_policy_nginx == content_security_policy_nginx
+    when: 
+      - "'nginx' in ansible_facts.packages" 
+      - check_content_security_policy_nginx.stdout == content_security_policy_nginx
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy isn't configured"
-    when: check_content_security_policy_nginx != content_security_policy_nginx
+    when: 
+      - "'nginx' in ansible_facts.packages" 
+      - check_content_security_policy_nginx.stdout != content_security_policy_nginx
