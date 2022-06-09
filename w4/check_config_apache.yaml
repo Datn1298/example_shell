@@ -27,14 +27,15 @@
     debug:
       msg: "X-XSS-Protection is configured"
     when: 
-      - check_x_xss_protection_apache == x_xss_protection_apache
+      - check_x_xss_protection_apache.stdout == x_xss_protection_apache
       - "'apache2' in ansible_facts.packages"
   - name: Result X-XSS-Protection
     debug:
       msg: "X-XSS-Protection isn't configured"
     when: 
-      - check_x_xss_protection_apache != x_xss_protection_apache
+      - check_x_xss_protection_apache.stdout != x_xss_protection_apache
       - "'apache2' in ansible_facts.packages"
+  
   - name: Check HTTP Strict Transport Security
     shell: echo $(cat /etc/apache2/apache2.conf | grep "^Header set Strict-Transport-Security.*")
     register: check_http_strict_transport_security_apache
@@ -42,13 +43,13 @@
     debug:
       msg: "HTTP Strict Transport Security is configured"
     when: 
-      - check_http_strict_transport_security_apache == http_strict_transport_security_apache
+      - check_http_strict_transport_security_apache.stdout == http_strict_transport_security_apache
       - "'apache2' in ansible_facts.packages"
   - name: Result HTTP Strict Transport Security
     debug:
       msg: "HTTP Strict Transport Security isn't configured"
     when: 
-      - check_http_strict_transport_security_apache != http_strict_transport_security_apache
+      - check_http_strict_transport_security_apache.stdout != http_strict_transport_security_apache
       - "'apache2' in ansible_facts.packages"
 
   - name: Check X-Frame-Options
@@ -58,13 +59,13 @@
     debug:
       msg: "X-Frame-Options is configured"
     when:
-      - check_x_frame_options_apache == x_frame_options_apache
+      - check_x_frame_options_apache.stdout == x_frame_options_apache
       - "'apache2' in ansible_facts.packages"
   - name: Result X-Frame-Options
     debug:
       msg: "X-Frame-Options isn't configured"
     when: 
-      - check_x_frame_options_apache != x_frame_options_apache
+      - check_x_frame_options_apache.stdout != x_frame_options_apache
       - "'apache2' in ansible_facts.packages"
 
   - name: Check X-Content-Type-Options
@@ -74,13 +75,13 @@
     debug:
       msg: "X-Content-Type-Options is configured"
     when:
-      - check_x_content_type_options_apache == x_content_type_options_apache
+      - check_x_content_type_options_apache.stdout == x_content_type_options_apache
       - "'apache2' in ansible_facts.packages"
   - name: Result X-Content-Type-Options
     debug:
       msg: "X-Content-Type-Options isn't configured"
     when: 
-      - check_x_content_type_options_apache != x_content_type_options_apache
+      - check_x_content_type_options_apache.stdout != x_content_type_options_apache
       - "'apache2' in ansible_facts.packages"
 
   - name: Check Content Security Policy
@@ -90,11 +91,11 @@
     debug:
       msg: "Content Security Policy is configured"
     when:
-      - check_content_security_policy_apache == content_security_policy_apache
+      - check_content_security_policy_apache.stdout == content_security_policy_apache
       - "'apache2' in ansible_facts.packages"
   - name: Result Content Security Policy
     debug:
       msg: "Content Security Policy isn't configured"
     when: 
-      - check_content_security_policy_apache != content_security_policy_apache
+      - check_content_security_policy_apache.stdout != content_security_policy_apache
       - "'apache2' in ansible_facts.packages"
