@@ -24,7 +24,7 @@ check_config_apache(){
 
 check_config_nginx(){
 	echo "===== CHECK CONFIG NGINX ====="
-    ansible-playbook check_config_nginx.yaml
+	ansible-playbook check_config_nginx.yaml
 }
 
 while :
