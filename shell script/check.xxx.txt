@@ -1,0 +1,29 @@
+Kiểm tra ổ cứng
+```bash
+$ fdisk -l
+```
+
+Kiểm tra root filesystem free space
+```
+$ df -h
+```
+
+To check for existing free space on your Volume Group 
+```
+$ vgdisplay
+```
+
+check the Logical Volume size
+```
+$ lvdisplay
+```
+
+extend the LV to the maximum size usable
+```
+$ lvxtend -l +100%FREE /dev/...
+```
+
+extend your filesystem
+```
+$ resize2fs /dev/...
+```
