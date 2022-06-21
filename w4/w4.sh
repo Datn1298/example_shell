@@ -51,3 +51,11 @@ do
 	sleep 4
 	clear
 done
+
+
+1. fhovpn.fpt.com.vn/ tải về
+2. cài
+3. chạy 
+4. kết nối đến fhovpn.fpt.com.vn
+5. tải VMware horizol client
+6. đăng nhập bthg
