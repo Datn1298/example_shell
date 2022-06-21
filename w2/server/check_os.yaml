@@ -6,11 +6,13 @@
     register: os_info
   - name: OS info
     debug: var=os_info.stdout_lines
+ 
   - name: GET FREE AND USED MEMORY
     command: free -h
     register: mem_info
   - name: FREE AND USED MEMORY
     debug: var=mem_info.stdout_lines
+  
   - name: GET FILE SYSTEM DISK SPACE USAGE
     command: df -h
     register: disk_info
