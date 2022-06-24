@@ -1,0 +1,48 @@
+---
+- hosts: test
+  become: true
+  tasks:
+  - name: get package info
+    package_facts:
+      manager: "auto"
+  - name: remove old agent if os is debian
+    shell: apt purge zabbix-agent -y
+    when:
+      - ansible_facts['os_family'] == "Debian"
+  - name: remove old agent if os is redhat
+    shell: yum remove zabbix-agent -y
+    when:
+      - ansible_facts['os_family'] == "RedHat"
+
+  - name: copy
+    copy:
+      src: /home/datnt/w2/install/agent/linux/zabbix-agent2_6.0.5-1+ubuntu20.04_amd64.deb
+      dest: /tmp/zabbix-agent2_6.0.5-1+ubuntu20.04_amd64.deb
+    when:
+      - ansible_facts['os_family'] == "Debian"
+  - name: copy
+    copy:
+      src: /home/datnt/w2/install/agent/linux/zabbix-agent2-6.0.5-1.el7.x86_64.rpm
+      dest: /tmp/zabbix-agent2-6.0.5-1.el7.x86_64.rpm
+    when:
+      - ansible_facts['os_family'] == "RedHat"
+
+  - name: install
+    shell: dpkg -i /tmp/zabbix-agent2_6.0.5-1+ubuntu20.04_amd64.deb
+    notify:
+      - start zabbix-agent
+    when:
+      - ansible_facts['os_family'] == "Debian"
+  - name: install
+    shell: rpm -ivh /tmp/zabbix-agent2-6.0.5-1.el7.x86_64.rpm
+    notify:
+      - start zabbix-agent
+    when:
+      - ansible_facts['os_family'] == "RedHat"
+
+  handlers:
+  - name: start zabbix-agent
+    service:
+      name: zabbix-agent2
+      state: started
+      enabled: yes
